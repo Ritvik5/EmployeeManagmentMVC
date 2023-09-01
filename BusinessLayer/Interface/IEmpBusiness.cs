@@ -1,10 +1,13 @@
-﻿using System;
+﻿using CommonLayer;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace BusinessLayer.Interface
 {
-    public class IEmpBusiness
+    public interface IEmpBusiness
     {
+        void AddEmployee(EmployeeModel employeeModel);
+        IEnumerable<EmployeeModel> GetAllEmployee();
     }
 }

@@ -1,5 +1,6 @@
 ﻿using CommonLayer;
 using Microsoft.Extensions.Configuration;
+using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,7 +8,7 @@ using System.Text;
 
 namespace RepositoryLayer.Services
 {
-    public class EmpRepo
+    public class EmpRepo : IEmpRepo
     {
         private readonly IConfiguration configuration;
         private readonly string ConnectionString;
@@ -15,7 +16,7 @@ namespace RepositoryLayer.Services
         public EmpRepo(IConfiguration configuration)
         {
             this.configuration = configuration;
-            ConnectionString = configuration.GetConnectionString("DefaultConnection");
+            ConnectionString = configuration.GetConnectionString("MyDatabaseConnection");
         }
         //To Add Employee
         public void AddEmployee(EmployeeModel employeeModel)
