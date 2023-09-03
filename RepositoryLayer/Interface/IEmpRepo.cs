@@ -7,7 +7,7 @@ namespace RepositoryLayer.Interface
 {
     public interface IEmpRepo
     {
-        void AddEmployee(EmployeeModel employeeModel);
+        bool AddEmployee(EmployeeModel employeeModel);
         IEnumerable<EmployeeModel> GetAllEmployee();
     }
 }

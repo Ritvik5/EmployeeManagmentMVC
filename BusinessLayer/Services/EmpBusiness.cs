@@ -16,11 +16,11 @@ namespace BusinessLayer.Services
             this.empRepo = empRepo;
         }
 
-        public void AddEmployee(EmployeeModel employeeModel)
+        public bool AddEmployee(EmployeeModel employeeModel)
         {
             try
             {
-                empRepo.AddEmployee(employeeModel);
+                return empRepo.AddEmployee(employeeModel);
             }
             catch (Exception)
             {

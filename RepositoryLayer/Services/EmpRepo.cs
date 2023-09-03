@@ -19,10 +19,11 @@ namespace RepositoryLayer.Services
             ConnectionString = configuration.GetConnectionString("MyDatabaseConnection");
         }
         //To Add Employee
-        public void AddEmployee(EmployeeModel employeeModel)
+        public bool AddEmployee(EmployeeModel employeeModel)
         {
             try
             {
+                int flag = 0;
                 using(SqlConnection con = new SqlConnection(ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand("spAddEmployee", con);
@@ -37,9 +38,10 @@ namespace RepositoryLayer.Services
                     cmd.Parameters.AddWithValue("@Notes", employeeModel.Notes);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    flag = cmd.ExecuteNonQuery();
                     con.Close();
                 }
+                return flag > 0 ? true : false;
             }
             catch (Exception)
             {
@@ -77,6 +79,35 @@ namespace RepositoryLayer.Services
                     con.Close();
                 }
                 return employees;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public void UpdateEmployee(EmployeeModel employeeModel)
+        {
+            try
+            {
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("spUpdateEmployee", con);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+                    cmd.Parameters.AddWithValue("@EmployeeId", employeeModel.EmployeeId);
+                    cmd.Parameters.AddWithValue("@Name", employeeModel.Name);
+                    cmd.Parameters.AddWithValue("@ProfileImage", employeeModel.ProfileImage);
+                    cmd.Parameters.AddWithValue("@Gender", employeeModel.Gender);
+                    cmd.Parameters.AddWithValue("@Department", employeeModel.Department);
+                    cmd.Parameters.AddWithValue("@Salary", employeeModel.Salary);
+                    cmd.Parameters.AddWithValue("@StartDate", employeeModel.StartDate);
+                    cmd.Parameters.AddWithValue("@Notes", employeeModel.Notes);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                    con.Close();
+                }
             }
             catch (Exception)
             {

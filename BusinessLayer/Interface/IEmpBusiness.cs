@@ -7,7 +7,7 @@ namespace BusinessLayer.Interface
 {
     public interface IEmpBusiness
     {
-        void AddEmployee(EmployeeModel employeeModel);
+        bool AddEmployee(EmployeeModel employeeModel);
         IEnumerable<EmployeeModel> GetAllEmployee();
     }
 }
