@@ -105,11 +105,11 @@ namespace EmployeeManagementMVC.Controllers
         }
         [HttpPost,ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(EmployeeModel employee)
+        public IActionResult DeleteConfirmed(int EmployeeId)
         {
             try
             {
-                bool result = empBusiness.DeleteEmployee(employee.EmployeeId);
+                bool result = empBusiness.DeleteEmployee(EmployeeId);
                 if (!result)
                 {
                     TempData["errorMessage"] = "Unable to Delete Employee";
