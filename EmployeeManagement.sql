@@ -57,6 +57,7 @@ BEGIN
 	Salary = @Salary,
 	StartDate = @StartDate,
 	Notes = @Notes
+	WHERE EmployeeId = @EmployeeId
 END
 
 CREATE OR ALTER PROCEDURE spGetById(

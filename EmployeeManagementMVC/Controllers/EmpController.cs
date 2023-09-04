@@ -105,11 +105,11 @@ namespace EmployeeManagementMVC.Controllers
         }
         [HttpPost,ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int EmployeeId)
+        public IActionResult DeleteConfirmed(int employeeId)
         {
             try
             {
-                bool result = empBusiness.DeleteEmployee(EmployeeId);
+                bool result = empBusiness.DeleteEmployee(employeeId);
                 if (!result)
                 {
                     TempData["errorMessage"] = "Unable to Delete Employee";
@@ -117,6 +117,25 @@ namespace EmployeeManagementMVC.Controllers
                 }
                 TempData["successMessage"] = "Employee details deleted";
                 return RedirectToAction("Index");
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpGet]
+        public IActionResult Details(int employeeId)
+        {
+            try
+            {
+                EmployeeModel employee = empBusiness.GetById(employeeId);
+                if (employee.EmployeeId == 0)
+                {
+                    TempData["errorMessage"] = $"Employee deatils not found with id: {employeeId}";
+                    return RedirectToAction("Index");
+                }
+                return View(employee);
             }
             catch (System.Exception)
             {

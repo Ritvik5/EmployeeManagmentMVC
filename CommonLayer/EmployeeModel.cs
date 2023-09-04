@@ -15,7 +15,6 @@ namespace CommonLayer
         [DisplayName("Profile Image")]
         public string ProfileImage { get; set; }
         [Required]
-        [DisplayName("Gender : M / F")]
         public char Gender { get; set; }
         [Required]
         [DisplayName("Department Name")]
