@@ -39,5 +39,90 @@ namespace EmployeeManagementMVC.Controllers
             }
             return View(employee);
         }
+
+        [HttpGet]
+        public IActionResult Edit(int employeeId)
+        {
+            try
+            {
+                EmployeeModel employee = empBusiness.GetById(employeeId);
+                if (employee.EmployeeId == 0)
+                {
+                    TempData["errorMessage"] = $"Employee deatils not found with id: {employeeId}";
+                    return RedirectToAction("Index");
+                }
+                return View(employee);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost]
+        public IActionResult Edit(EmployeeModel employee)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    TempData["errorMessage"] = "Model data is invalid";
+                    return View();
+                }
+                bool result = empBusiness.UpdateEmployee(employee);
+                if(!result)
+                {
+                    TempData["errorMessage"] = "Unable to update Employee";
+                    return View();
+                }
+                TempData["successMessage"] = "Employee details updated";
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpGet]
+        public IActionResult Delete(int employeeId)
+        {
+            try
+            {
+                EmployeeModel employee = empBusiness.GetById(employeeId);
+                if (employee.EmployeeId == 0)
+                {
+                    TempData["errorMessage"] = $"Employee deatils not found with id: {employeeId}";
+                    return RedirectToAction("Index");
+                }
+                return View(employee);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpPost,ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteConfirmed(EmployeeModel employee)
+        {
+            try
+            {
+                bool result = empBusiness.DeleteEmployee(employee.EmployeeId);
+                if (!result)
+                {
+                    TempData["errorMessage"] = "Unable to Delete Employee";
+                    return View();
+                }
+                TempData["successMessage"] = "Employee details deleted";
+                return RedirectToAction("Index");
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

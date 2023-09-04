@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using RepositoryLayer.Interface;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 
@@ -86,10 +87,47 @@ namespace RepositoryLayer.Services
                 throw;
             }
         }
-        public void UpdateEmployee(EmployeeModel employeeModel)
+        //Get Employee by EmployeeId
+        public EmployeeModel GetById(int empId)
         {
             try
             {
+                EmployeeModel employee = new EmployeeModel();
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("spGetById", con);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmpId", empId);
+
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        employee.EmployeeId = Convert.ToInt32(reader["EmployeeId"]);
+                        employee.Name = Convert.ToString(reader["Name"]);
+                        employee.ProfileImage = Convert.ToString(reader["ProfileImage"]);
+                        employee.Gender = Convert.ToChar(reader["Gender"]);
+                        employee.Department = Convert.ToString(reader["Department"]);
+                        employee.Salary = Convert.ToDecimal(reader["Salary"]);
+                        employee.StartDate = Convert.ToDateTime(reader["StartDate"]);
+                        employee.Notes = Convert.ToString(reader["Notes"]);
+                    }
+                    con.Close();
+                }
+                return employee;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        //Update the employee Details
+        public bool UpdateEmployee(EmployeeModel employeeModel)
+        {
+            try
+            {
+                int flag = 0;
                 using (SqlConnection con = new SqlConnection(ConnectionString))
                 {
                     SqlCommand cmd = new SqlCommand("spUpdateEmployee", con);
@@ -105,9 +143,10 @@ namespace RepositoryLayer.Services
                     cmd.Parameters.AddWithValue("@Notes", employeeModel.Notes);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                    flag = cmd.ExecuteNonQuery();
                     con.Close();
                 }
+                return flag > 0 ? true : false;
             }
             catch (Exception)
             {
@@ -115,6 +154,30 @@ namespace RepositoryLayer.Services
                 throw;
             }
         }
+        // To Delete the employee by id
+        public bool DeleteEmployee(int empId)
+        {
+            try
+            {
+                int flag = 0;
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("spDeleteById", con);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@ID", empId);
 
+                    con.Open();
+                    flag = cmd.ExecuteNonQuery();
+                    con.Close();
+                }
+                return flag > 0 ? true : false;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

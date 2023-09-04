@@ -58,3 +58,25 @@ BEGIN
 	StartDate = @StartDate,
 	Notes = @Notes
 END
+
+CREATE OR ALTER PROCEDURE spGetById(
+	@EmpId INT
+)
+AS
+BEGIN
+	SELECT EmployeeId,Name,ProfileImage,Gender,Department,Salary,StartDate,Notes FROM Employee
+	WHERE EmployeeId = @EmpId
+END
+
+EXECUTE spGetById
+		@EmpId = 2;
+
+
+CREATE OR ALTER PROCEDURE spDeleteById(
+	@ID INT
+)
+AS
+BEGIN
+	DELETE FROM Employee
+	WHERE EmployeeId = @ID
+END

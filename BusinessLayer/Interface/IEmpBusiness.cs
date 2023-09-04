@@ -9,5 +9,8 @@ namespace BusinessLayer.Interface
     {
         bool AddEmployee(EmployeeModel employeeModel);
         IEnumerable<EmployeeModel> GetAllEmployee();
+        EmployeeModel GetById(int empId);
+        bool UpdateEmployee(EmployeeModel employeeModel);
+        bool DeleteEmployee(int empId);
     }
 }

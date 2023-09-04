@@ -29,11 +29,48 @@ namespace BusinessLayer.Services
             }
         }
 
+        public bool DeleteEmployee(int empId)
+        {
+            try
+            {
+                return empRepo.DeleteEmployee(empId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public IEnumerable<EmployeeModel> GetAllEmployee()
         {
             try
             {
                 return this.empRepo.GetAllEmployee();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public EmployeeModel GetById(int empId)
+        {
+            try
+            {
+                return empRepo.GetById(empId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        public bool UpdateEmployee(EmployeeModel employeeModel)
+        {
+            try
+            {
+                return empRepo.UpdateEmployee(employeeModel);
             }
             catch (Exception)
             {
