@@ -179,5 +179,40 @@ namespace RepositoryLayer.Services
                 throw;
             }
         }
+        //To Login the employee by id and name
+        public EmployeeModel LogInEmployee(EmployeeLogin employeeLogin)
+        {
+            try
+            {
+                EmployeeModel employee = new EmployeeModel();
+                using (SqlConnection con = new SqlConnection(ConnectionString))
+                {
+                    SqlCommand cmd = new SqlCommand("spLoginEmployee", con);
+                    cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@EmpId", employeeLogin.EmployeeId);
+                    cmd.Parameters.AddWithValue("@EmpName", employeeLogin.Name);
+                    con.Open();
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        employee.EmployeeId = Convert.ToInt32(reader["EmployeeId"]);
+                        employee.Name = Convert.ToString(reader["Name"]);
+                        employee.ProfileImage = Convert.ToString(reader["ProfileImage"]);
+                        employee.Gender = Convert.ToChar(reader["Gender"]);
+                        employee.Department = Convert.ToString(reader["Department"]);
+                        employee.Salary = Convert.ToDecimal(reader["Salary"]);
+                        employee.StartDate = Convert.ToDateTime(reader["StartDate"]);
+                        employee.Notes = Convert.ToString(reader["Notes"]);
+                    }
+                    con.Close();
+                }
+                return employee;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

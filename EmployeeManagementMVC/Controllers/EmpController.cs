@@ -1,5 +1,6 @@
 ﻿using BusinessLayer.Interface;
 using CommonLayer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace EmployeeManagementMVC.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost("Emp/Create")]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind] EmployeeModel employee)
         {
@@ -59,7 +60,7 @@ namespace EmployeeManagementMVC.Controllers
                 throw;
             }
         }
-        [HttpPost]
+        [HttpPost("Emp/Edit{employee}")]
         public IActionResult Edit(EmployeeModel employee)
         {
             try
@@ -103,7 +104,7 @@ namespace EmployeeManagementMVC.Controllers
                 throw;
             }
         }
-        [HttpPost,ActionName("Delete")]
+        [HttpPost("Emp/Delete"),ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int employeeId)
         {
@@ -125,17 +126,54 @@ namespace EmployeeManagementMVC.Controllers
             }
         }
         [HttpGet]
-        public IActionResult Details(int employeeId)
+        public IActionResult Details()
         {
             try
             {
-                EmployeeModel employee = empBusiness.GetById(employeeId);
+                int empId = (int)HttpContext.Session.GetInt32("EmployeeId");
+                string empName = HttpContext.Session.GetString("Name");
+                EmployeeModel employee = empBusiness.GetById(empId);
                 if (employee.EmployeeId == 0)
                 {
-                    TempData["errorMessage"] = $"Employee deatils not found with id: {employeeId}";
+                    TempData["errorMessage"] = $"Employee deatils not found with id: {empId}";
                     return RedirectToAction("Index");
                 }
                 return View(employee);
+            }
+            catch (System.Exception)
+            {
+
+                throw;
+            }
+        }
+        [HttpGet]
+        public IActionResult Login()
+        {
+            var employeeLogin = new EmployeeLogin();
+            return View(employeeLogin);
+        }
+        [HttpPost]
+        public IActionResult Login([Bind] EmployeeLogin employeeLogin)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    TempData["errorMessage"] = "Model data is invalid";
+                    return View();
+                }
+                EmployeeModel employee = empBusiness.LogInEmployee(employeeLogin);
+                if(employee != null)
+                {
+                    HttpContext.Session.SetInt32("EmployeeId", employee.EmployeeId);
+                    HttpContext.Session.SetString("Name", employee.Name);
+                    return RedirectToAction("Details");
+                }
+                else
+                {
+                    return View(employeeLogin);
+                }
+
             }
             catch (System.Exception)
             {

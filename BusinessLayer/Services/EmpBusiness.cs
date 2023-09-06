@@ -66,6 +66,20 @@ namespace BusinessLayer.Services
                 throw;
             }
         }
+
+        public EmployeeModel LogInEmployee(EmployeeLogin employeeLogin)
+        {
+            try
+            {
+                return empRepo.LogInEmployee(employeeLogin);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public bool UpdateEmployee(EmployeeModel employeeModel)
         {
             try

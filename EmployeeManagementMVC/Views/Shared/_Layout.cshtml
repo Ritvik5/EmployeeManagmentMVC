@@ -7,11 +7,13 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<body style="background-color: lightgray;">
+    <header style ="background-color: lightgray;">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-lightgray border-bottom box-shadow mb-3">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Employee Management</a>
+                <img src="~/Assets/MVC.png" />
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" class="titleStyle.css">Employee</a><br>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" class="titleStyle.css">Management</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,7 +35,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3" >
             @RenderBody()
         </main>
     </div>

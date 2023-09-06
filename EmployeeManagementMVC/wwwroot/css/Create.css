@@ -1,1 +1,72 @@
-﻿
+﻿.centerLink {
+    border: 1px solid black;
+    text-align: center;
+    height: auto;
+}
+.form-align{
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    align-content:center;
+    justify-content:center;
+    align-items:center;
+
+}
+.row {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.indexLink {
+    border: 1px solid cadetblue;
+    background-color: cadetblue;
+    text-decoration: none;
+    text-transform: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    color: black;
+    margin-bottom: 10px;
+}
+.indexLink:hover {
+    text-decoration: none;
+    text-rendering: auto;
+}
+.submitButton {
+    border: 1px solid cadetblue;
+    background-color: cadetblue;
+    text-decoration: none;
+    text-transform: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+    color: black;
+    margin-bottom: 10px;
+}
+.submitButton:hover {
+    text-decoration: none;
+    text-rendering: auto;
+}
+
+.formContent {
+    border: 1px solid black;
+    background-color: whitesmoke;
+    margin-bottom: 20px;
+    width: 800px;
+    text-align: left;
+}
+.control-label {
+    font-weight: bold;
+    font-family: Arial,Verdana,sans-serif;
+}
+.nameEntity {
+    text-align: left;
+}
+.headerStyle {
+    background-color: cadetblue;
+    padding: 5px 10px;
+}

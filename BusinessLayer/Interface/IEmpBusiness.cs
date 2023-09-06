@@ -12,5 +12,6 @@ namespace BusinessLayer.Interface
         EmployeeModel GetById(int empId);
         bool UpdateEmployee(EmployeeModel employeeModel);
         bool DeleteEmployee(int empId);
+        EmployeeModel LogInEmployee(EmployeeLogin employeeLogin);
     }
 }

@@ -4,13 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>List of Employees</h1>
+<link href="~/css/index.css" rel="stylesheet" />
 
-<p>
-    <a asp-action="Create">Create New</a>
+<h1>List of Employees </h1>
+
+<p >
+    <a asp-action="Create" class="createLink">Create New</a>
 </p>
 <table class="table">
-    <thead>
+    <thead class="tableLink">
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.EmployeeId)
@@ -66,10 +68,17 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Notes)
             </td>
-            <td>
-                    @Html.ActionLink("Edit", "Edit", new { employeeId = item.EmployeeId  }) |
-                    @Html.ActionLink("Details", "Details", new { employeeId = item.EmployeeId }) |
+                <td class="buttonWidth">
+                <span class="editlink">
+                    @Html.ActionLink("Edit", "Edit", new { employeeId = item.EmployeeId  }) 
+                    </span> &nbsp; | &nbsp;
+                <span class="editlink">
+                    @Html.ActionLink("Details", "Details", new { employeeId = item.EmployeeId })
+                    </span> &nbsp | &nbsp;
+                
+                <span class="editlink">
                     @Html.ActionLink("Delete", "Delete", new { employeeId = item.EmployeeId })
+                </span> 
             </td>
         </tr>
 }

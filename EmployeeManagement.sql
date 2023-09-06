@@ -81,3 +81,14 @@ BEGIN
 	DELETE FROM Employee
 	WHERE EmployeeId = @ID
 END
+
+CREATE OR ALTER PROCEDURE spLoginEmployee(
+	@EmpId INT,
+	@EmpName VARCHAR(50)
+)
+AS
+BEGIN
+	SELECT * 
+	FROM Employee
+	WHERE EmployeeId = @EmpId AND Name = @EmpName
+END
