@@ -11,9 +11,17 @@
     <header style ="background-color: lightgray;">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-lightgray border-bottom box-shadow mb-3">
             <div class="container">
-                <img src="~/Assets/MVC.png" />
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" class="titleStyle.css">Employee</a><br>
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index" class="titleStyle.css">Management</a>
+                <div class="imgHead">
+                    <img src="~/Assets/MVC.png" />
+                    <div class="headContent">
+                        <span>
+                            <a asp-area="" asp-controller="Home" asp-action="Index" class="titleStyle">Employee</a>
+                        </span>
+                        <span>
+                            <a  asp-area="" asp-controller="Home" asp-action="Index" class="titleStyle">Management</a>
+                        </span>
+                    </div>
+                </div>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -39,7 +47,6 @@
             @RenderBody()
         </main>
     </div>
-
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2023 - EmployeeManagementMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>

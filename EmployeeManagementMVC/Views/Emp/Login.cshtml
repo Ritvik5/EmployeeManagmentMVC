@@ -3,13 +3,12 @@
 @{
     ViewData["Title"] = "Login";
 }
-
-<h1>Login</h1>
-
-<h4>EmployeeLogin</h4>
-<hr />
+<link href="~/css/login.css" rel="stylesheet" />
+<div class="centerLink">
+<h1 class="headerStyle">Sign in </h1>
+<h4>Use your Employee Account</h4>
 <div class="row">
-    <div class="col-md-4">
+        <div class="formContent">
         <form asp-action="Login">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -23,16 +22,22 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Sing in" class="detaiLink" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div style=" padding-bottom:20px;display:flex;justify-content:center;">
+    <div>
+            <p>New Employee? </p> 
+    </div>
+        &nbsp;&nbsp;
+        <div>
+         <a asp-action="Create" class="createLink">Sign up</a>
+    </div>
 </div>
-
+</div>
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

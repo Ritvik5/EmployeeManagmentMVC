@@ -33,6 +33,7 @@ namespace EmployeeManagementMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind] EmployeeModel employee)
         {
+            string message = TempData["errorMessage"].ToString();
             if (ModelState.IsValid)
             {
                 empBusiness.AddEmployee(employee);
@@ -93,7 +94,7 @@ namespace EmployeeManagementMVC.Controllers
                 EmployeeModel employee = empBusiness.GetById(employeeId);
                 if (employee.EmployeeId == 0)
                 {
-                    TempData["errorMessage"] = $"Employee deatils not found with id: {employeeId}";
+                    TempData["errorMessage"] = $"Employee deatils not found with id : {employeeId}.";
                     return RedirectToAction("Index");
                 }
                 return View(employee);
@@ -163,7 +164,12 @@ namespace EmployeeManagementMVC.Controllers
                     return View();
                 }
                 EmployeeModel employee = empBusiness.LogInEmployee(employeeLogin);
-                if(employee != null)
+                if (employee.EmployeeId == 0)
+                {
+                    TempData["errorMessage"] = $"Employee deatils not found with id : {employeeLogin.EmployeeId} .Please Register!!";
+                    return RedirectToAction("Create");
+                }
+                if (employee != null)
                 {
                     HttpContext.Session.SetInt32("EmployeeId", employee.EmployeeId);
                     HttpContext.Session.SetString("Name", employee.Name);

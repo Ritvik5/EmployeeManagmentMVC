@@ -63,7 +63,7 @@ namespace EmployeeManagementMVC
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Emp}/{action=Index}/{id?}");
+                    pattern: "{controller=Emp}/{action=Login}/{id?}");
             });
         }
     }

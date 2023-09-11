@@ -2,12 +2,19 @@
 
 @{
     ViewData["Title"] = "Create";
+    
 }
 
 <link href="~/css/create.css" rel="stylesheet" />
 <div class="centerLink">
 <h1 class="headerStyle">Add Employee </h1>
 <div class="row">
+        <div >
+            @if (TempData["errorMessage"] != null)
+            {
+                <p style="color:red;font-weight: bold;font-family: Arial,Verdana,sans-serif;">@TempData["errorMessage"]</p>
+            }
+    </div>
     <div class="col-md-4 form-align formContent">
         <form asp-action="Create" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>

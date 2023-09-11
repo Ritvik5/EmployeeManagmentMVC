@@ -80,3 +80,23 @@ body {
     color:darkslategray;
 }
 
+.headContent{
+    
+    width: 150px;
+    display: flex;
+    flex-direction:column;
+    
+}
+
+.imgHead{
+    display:flex;
+    flex-direction:row;
+    height: 60px;
+}
+
+.titleStyle {
+    font-size: 22px;
+    font-weight:600;
+    font-family: Arial,Verdana,sans-serif;
+    color: black;
+}
